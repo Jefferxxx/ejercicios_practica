@@ -14,40 +14,56 @@
 // condicionales.Si está permitido solicitar al operador el tipo de su tarjeta de
 // crédito
 
-let tarjeta = prompt("Ingrese el número de su tarjeta de crédito");
-function validacionTarjeta() {
 
-  while (isNaN(tarjeta)) {
-    +
-    alert("El número de la tarjeta debe ser un número");
-    tarjeta = prompt("Ingrese el número de su tarjeta de crédito");
+// Función que valida el número de tarjeta de crédito
+function validarTarjeta(tarjeta) {
+  // Expresión regular que permite solo dígitos y hasta 16 caracteres
+  const regex = /^[0-9]{1,16}$/; 
+  let tipoTarjeta = ""; // Variable para almacenar el tipo de tarjeta
+
+  // Verifica si el número de tarjeta cumple con la expresión regular
+  if (!regex.test(tarjeta)) {
+      return "Error: Ingrese solo números enteros positivos y hasta 16 dígitos."; // Mensaje de error si no es válido
   }
 
-  while (tarjeta.length > 16) {
-    alert("El número de la tarjeta debe tener 16 dígitos");
-    tarjeta = prompt("Ingrese el número de su tarjeta de crédito");
+  // Validación para American Express: 15 dígitos, comienza con 34 o 37
+  if (/^34|37/.test(tarjeta) && tarjeta.length === 15) {
+      tipoTarjeta = "American Express";
+  } 
+  // Validación para Diners Club: 14 dígitos, comienza con 300-305 o 36-38
+  else if (/^300|301|302|303|304|305|36|38/.test(tarjeta) && tarjeta.length === 14) {
+      tipoTarjeta = "Diners Club";
+  } 
+  // Validación para Discover: 16 dígitos, comienza con 6011
+  else if (/^6011/.test(tarjeta) && tarjeta.length === 16) {
+      tipoTarjeta = "Discover";
+  } 
+  // Validación para Mastercard: 16 dígitos, comienza con 51-55
+  else if (/^5[1-5]/.test(tarjeta) && tarjeta.length === 16) {
+      tipoTarjeta = "Mastercard";
+  } 
+  // Validación para Visa: 16 dígitos, comienza con 4
+  else if (/^4/.test(tarjeta) && tarjeta.length === 16) {
+      tipoTarjeta = "Visa";
+  } 
+  // Si no se reconoce la tarjeta, devuelve un mensaje de error
+  else {
+      return "Tarjeta no válida o no reconocida.";
   }
-  while (tarjeta.length < 16) {
-    alert("El número de la tarjeta debe tener 16 dígitos");
-    tarjeta = prompt("Ingrese el número de su tarjeta de crédito");
-  }
 
-  if (tarjeta.length == 16) {
-    if (tarjeta.substring(0, 2) == "34" || tarjeta.substring(0, 2) == "37") {
-      alert("su tarjeta es de american express")
-    }
-  } else if (tarjeta.substring(0, 3) == "300" || tarjeta.substring(0, 3) == "305" || tarjeta.substring(0, 3) == "36" || tarjeta.substring(0, 3) == "38") { 
-    alert("su tarjeta es de Dinners club")
+  // Devuelve el tipo de tarjeta validada
+  return `La tarjeta es de tipo: ${tipoTarjeta}`;
+}
 
-  } else if (tarjeta.substring(0, 4) == "6011") {
-    alert("su tarjeat es Discover")
+// Ejemplo de uso:
+// Solicita al usuario que ingrese el número de su tarjeta de crédito
+const numeroTarjeta = prompt("Ingrese el número de su tarjeta de crédito:");
+// Llama a la función validarTarjeta y almacena el resultado
+const resultado = validarTarjeta(numeroTarjeta);
+// Muestra el resultado en un cuadro de alerta
+alert(resultado);
 
-  } else if (tarjeta.substring(0, 2) == "51" || tarjeta.substring(0, 2) == "52" || tarjeta.substring(0, 2) == "53" || tarjeta.substring(0, 2) == "54" || tarjeta.substring(0, 2) == "55") {
-    alert("su tarjeta es de mastercard")
 
-  }else if 
-    
-  }
 
 
 
