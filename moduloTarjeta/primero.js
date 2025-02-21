@@ -15,15 +15,14 @@
 // crédito
 
 
-// Función que valida el número de tarjeta de crédito
-function validarTarjeta(tarjeta) {
+export function validarTarjeta(tarjeta) {//esta es la funcion que recibe el numero de la tarjeta y valida 
   // Expresión regular que permite solo dígitos y hasta 16 caracteres
   const regex = /^[0-9]{1,16}$/; 
   let tipoTarjeta = ""; // Variable para almacenar el tipo de tarjeta
 
   // Verifica si el número de tarjeta cumple con la expresión regular
   if (!regex.test(tarjeta)) {
-      return "Error: Ingrese solo números enteros positivos y hasta 16 dígitos."; // Mensaje de error si no es válido
+      return "Error: Ingrese solo números enteros positivos y hasta 16 dígitos."; // Mensaje de error si no es válida la tarjeta
   }
 
   // Validación para American Express: 15 dígitos, comienza con 34 o 37
@@ -48,20 +47,12 @@ function validarTarjeta(tarjeta) {
   } 
   // Si no se reconoce la tarjeta, devuelve un mensaje de error
   else {
-      return "Tarjeta no válida o no reconocida.";
+      return "Tarjeta no válida o no reconocida.";// se muestra que la tarjeta no es valida 
   }
 
   // Devuelve el tipo de tarjeta validada
-  return `La tarjeta es de tipo: ${tipoTarjeta}`;
+  return `La tarjeta es de tipo: ${tipoTarjeta}`;// se muestra el tipo de tarjeta
 }
-
-// Ejemplo de uso:
-// Solicita al usuario que ingrese el número de su tarjeta de crédito
-const numeroTarjeta = prompt("Ingrese el número de su tarjeta de crédito:");
-// Llama a la función validarTarjeta y almacena el resultado
-const resultado = validarTarjeta(numeroTarjeta);
-// Muestra el resultado en un cuadro de alerta
-alert(resultado);
 
 
 
